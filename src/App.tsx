@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
+import Landing from './pages/Landing';
 import Home from './pages/Home';
 import CreateForm from './pages/CreateForm';
 import FormSummary from './pages/FormSummary';
