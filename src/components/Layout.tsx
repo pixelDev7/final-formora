@@ -24,26 +24,27 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <nav className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
+            <div className="flex items-center min-w-0">
               <Link to="/" className="flex items-center space-x-2">
                 {brandSettings.logoUrl ? (
                   <img src={brandSettings.logoUrl} alt={brandSettings.brandName} className="h-8 w-8" />
                 ) : (
                   <ClipboardList className="h-8 w-8" style={{ color: brandSettings.primaryColor }} />
                 )}
-                <span className="text-xl font-bold text-gray-900">{brandSettings.brandName}</span>
+                <span className="text-xl font-bold text-gray-900 truncate">{brandSettings.brandName}</span>
               </Link>
             </div>
             
-            <div className="flex items-center space-x-4">
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center space-x-4">
               <Link
-                to="/home"
+                to="/"
                 className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  isActive('/home') && location.pathname === '/home'
+                  isActive('/') && location.pathname === '/'
                     ? 'text-white'
                     : 'text-gray-500 hover:text-gray-700'
                 }`}
-                style={isActive('/home') && location.pathname === '/home' ? { backgroundColor: brandSettings.primaryColor } : {}}
+                style={isActive('/') && location.pathname === '/' ? { backgroundColor: brandSettings.primaryColor } : {}}
               >
                 <Home className="h-4 w-4" />
                 <span>Home</span>
@@ -152,11 +153,29 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </button>
               </div>
             </div>
+            
+            {/* Mobile Navigation */}
+            <div className="lg:hidden flex items-center space-x-2">
+              <Link
+                to="/create"
+                className="flex items-center space-x-1 px-3 py-2 bg-blue-600 text-white rounded-md text-sm font-medium"
+              >
+                <Plus className="h-4 w-4" />
+                <span className="hidden sm:inline">Create</span>
+              </Link>
+              <Link
+                to="/dashboard"
+                className="flex items-center space-x-1 px-3 py-2 bg-gray-100 text-gray-700 rounded-md text-sm font-medium"
+              >
+                <BarChart3 className="h-4 w-4" />
+                <span className="hidden sm:inline">Dashboard</span>
+              </Link>
+            </div>
           </div>
         </div>
       </nav>
       
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {children}
       </main>
       

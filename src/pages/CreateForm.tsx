@@ -151,7 +151,7 @@ const CreateForm: React.FC = () => {
               type="text"
               value={form.title}
               onChange={(e) => handleFormChange('title', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base"
               placeholder="Enter form title..."
             />
           </div>
@@ -160,7 +160,7 @@ const CreateForm: React.FC = () => {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Form Type
             </label>
-            <div className="flex space-x-4">
+            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
               <label className="flex items-center space-x-2">
                 <input
                   type="radio"

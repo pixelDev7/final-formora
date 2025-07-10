@@ -209,7 +209,7 @@ const Dashboard: React.FC = () => {
           const stats = getFormStats(form.id);
           
           return (
-            <div key={form.id} className="bg-white p-6 rounded-lg shadow-sm border hover:shadow-md transition-shadow">
+            <div key={form.id} className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center space-x-2">
                   {form.type === 'quiz' ? (
@@ -217,7 +217,7 @@ const Dashboard: React.FC = () => {
                   ) : (
                     <ClipboardList className="h-5 w-5 text-green-600" />
                   )}
-                  <h3 className="font-semibold text-gray-900 truncate">{form.title}</h3>
+                  <h3 className="font-semibold text-gray-900 truncate text-sm sm:text-base">{form.title}</h3>
                 </div>
                 <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                   form.status === 'published' 
@@ -232,19 +232,19 @@ const Dashboard: React.FC = () => {
                 {form.description || 'No description'}
               </p>
 
-              <div className="grid grid-cols-3 gap-4 mb-4 text-center">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-4 text-center">
                 <div>
                   <div className="flex items-center justify-center mb-1">
                     <Users className="h-4 w-4 text-blue-600" />
                   </div>
-                  <div className="text-lg font-semibold text-gray-900">{stats.responseCount}</div>
+                  <div className="text-base sm:text-lg font-semibold text-gray-900">{stats.responseCount}</div>
                   <div className="text-xs text-gray-500">Responses</div>
                 </div>
                 <div>
                   <div className="flex items-center justify-center mb-1">
                     <FileText className="h-4 w-4 text-green-600" />
                   </div>
-                  <div className="text-lg font-semibold text-gray-900">{stats.questionCount}</div>
+                  <div className="text-base sm:text-lg font-semibold text-gray-900">{stats.questionCount}</div>
                   <div className="text-xs text-gray-500">Questions</div>
                 </div>
                 <div>
@@ -255,7 +255,7 @@ const Dashboard: React.FC = () => {
                       <Clock className="h-4 w-4 text-orange-600" />
                     )}
                   </div>
-                  <div className="text-lg font-semibold text-gray-900">
+                  <div className="text-base sm:text-lg font-semibold text-gray-900">
                     {form.type === 'quiz' && stats.avgScore !== null 
                       ? `${stats.avgScore}%` 
                       : `${stats.avgTime}s`
@@ -267,29 +267,29 @@ const Dashboard: React.FC = () => {
                 </div>
               </div>
 
-              <div className="text-xs text-gray-500 mb-4">
+              <div className="text-xs text-gray-500 mb-4 space-y-1">
                 <div>Created by {form.createdBy}</div>
                 <div>Created: {formatDate(form.createdAt)}</div>
               </div>
 
-              <div className="flex space-x-2">
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                 <Link
                   to={`/form/${form.id}/summary`}
-                  className="flex-1 text-center px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors text-sm"
+                  className="flex-1 text-center px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors text-sm flex items-center justify-center"
                 >
-                  <Eye className="h-4 w-4 mx-auto mb-1" />
-                  View
+                  <Eye className="h-4 w-4 mr-1" />
+                  <span>View</span>
                 </Link>
                 <Link
                   to={`/dashboard/${form.id}`}
-                  className={`flex-1 text-center px-3 py-2 text-white rounded-md transition-colors text-sm ${
+                  className={`flex-1 text-center px-3 py-2 text-white rounded-md transition-colors text-sm flex items-center justify-center ${
                     form.type === 'quiz' 
                       ? 'bg-blue-600 hover:bg-blue-700' 
                       : 'bg-green-600 hover:bg-green-700'
                   }`}
                 >
-                  <BarChart3 className="h-4 w-4 mx-auto mb-1" />
-                  Analytics
+                  <BarChart3 className="h-4 w-4 mr-1" />
+                  <span>Analytics</span>
                 </Link>
               </div>
             </div>
