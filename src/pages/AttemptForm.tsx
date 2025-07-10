@@ -37,13 +37,13 @@ const AttemptForm: React.FC = () => {
 
   useEffect(() => {
     if (!formId) {
-      navigate('/');
+      navigate('/home');
       return;
     }
 
     const formData = storage.getForm(formId);
     if (!formData) {
-      navigate('/');
+      navigate('/home');
       return;
     }
 
@@ -82,7 +82,7 @@ const AttemptForm: React.FC = () => {
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Form Not Found</h1>
           <p className="text-gray-600 mb-4">The form you're looking for doesn't exist or has been removed.</p>
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/home')}
             className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
           >
             Go Home
@@ -99,7 +99,7 @@ const AttemptForm: React.FC = () => {
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Form Not Available</h1>
           <p className="text-gray-600 mb-4">This form is currently in draft mode and not available for responses.</p>
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/home')}
             className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
           >
             Go Home

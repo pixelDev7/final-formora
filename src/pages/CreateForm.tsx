@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, useParams } from 'react-router-dom';
 import { Save, Send, Upload, Edit3, Brain, ClipboardList } from 'lucide-react';
 import { Form, Question } from '../types';
 import { storage } from '../utils/storage';
@@ -10,8 +10,10 @@ import BulkUpload from '../components/BulkUpload';
 const CreateForm: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { formId: paramFormId } = useParams();
   const editFormId = searchParams.get('edit');
-  const isEditing = Boolean(editFormId);
+  const actualFormId = paramFormId || editFormId;
+  const isEditing = Boolean(actualFormId);
 
   const [form, setForm] = useState<Form>({
     id: generateId(),
@@ -34,14 +36,14 @@ const CreateForm: React.FC = () => {
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
-    if (isEditing && editFormId) {
-      const existingForm = storage.getForm(editFormId);
+    if (isEditing && actualFormId) {
+      const existingForm = storage.getForm(actualFormId);
       if (existingForm) {
         setForm(existingForm);
-        setQuestions(storage.getQuestions(editFormId));
+        setQuestions(storage.getQuestions(actualFormId));
       }
     }
-  }, [isEditing, editFormId]);
+  }, [isEditing, actualFormId]);
 
   const handleFormChange = (field: keyof Form, value: any) => {
     setForm(prev => ({

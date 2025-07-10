@@ -30,17 +30,26 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Public routes without layout */}
+        {/* Public landing page */}
+        <Route path="/" element={<Landing />} />
+        
+        {/* Public form attempt routes - no layout */}
+        <Route path="/form/:formId" element={<AttemptForm />} />
         <Route path="/attempt/:formId" element={<AttemptForm />} />
         <Route path="/thanks" element={<Thanks />} />
         
         {/* Admin routes with layout */}
-        <Route path="/" element={
+        <Route path="/home" element={
           <Layout>
             <Home />
           </Layout>
         } />
         <Route path="/create" element={
+          <Layout>
+            <CreateForm />
+          </Layout>
+        } />
+        <Route path="/edit/:formId" element={
           <Layout>
             <CreateForm />
           </Layout>

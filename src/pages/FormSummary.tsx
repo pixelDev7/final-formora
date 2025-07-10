@@ -21,6 +21,7 @@ const FormSummary: React.FC = () => {
   }
 
   const shareUrl = `${window.location.origin}/attempt/${formId}`;
+  const editUrl = `${window.location.origin}/edit/${formId}`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(shareUrl);
@@ -119,22 +120,47 @@ const FormSummary: React.FC = () => {
       </div>
 
       {/* Share Section */}
-      <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
-        <h2 className="text-lg font-semibold text-blue-900 mb-3">Share Your Form</h2>
-        <div className="flex items-center space-x-2">
-          <input
-            type="text"
-            value={shareUrl}
-            readOnly
-            className="flex-1 px-3 py-2 bg-white border border-blue-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-          <button
-            onClick={copyToClipboard}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-          >
-            <Share2 className="h-4 w-4" />
-            <span>Copy Link</span>
-          </button>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Share for Responses */}
+        <div className="bg-green-50 p-6 rounded-lg border border-green-200">
+          <h2 className="text-lg font-semibold text-green-900 mb-3">Share for Responses</h2>
+          <p className="text-sm text-green-700 mb-3">Share this link for people to fill out your form</p>
+          <div className="flex items-center space-x-2">
+            <input
+              type="text"
+              value={shareUrl}
+              readOnly
+              className="flex-1 px-3 py-2 bg-white border border-green-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500 text-sm"
+            />
+            <button
+              onClick={copyToClipboard}
+              className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+            >
+              <Share2 className="h-4 w-4" />
+              <span>Copy</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Edit Link */}
+        <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
+          <h2 className="text-lg font-semibold text-blue-900 mb-3">Edit Form</h2>
+          <p className="text-sm text-blue-700 mb-3">Use this link to edit your form</p>
+          <div className="flex items-center space-x-2">
+            <input
+              type="text"
+              value={editUrl}
+              readOnly
+              className="flex-1 px-3 py-2 bg-white border border-blue-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+            />
+            <button
+              onClick={() => navigator.clipboard.writeText(editUrl)}
+              className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            >
+              <Share2 className="h-4 w-4" />
+              <span>Copy</span>
+            </button>
+          </div>
         </div>
       </div>
 
