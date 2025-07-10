@@ -264,7 +264,7 @@ const AttemptForm: React.FC = () => {
             type="text"
             value={value || ''}
             onChange={(e) => updateAnswer(question.id, e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
             placeholder="Enter your answer..."
             required={question.required}
           />
@@ -276,7 +276,7 @@ const AttemptForm: React.FC = () => {
             value={value || ''}
             onChange={(e) => updateAnswer(question.id, e.target.value)}
             rows={4}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
             placeholder="Enter your detailed answer..."
             required={question.required}
           />
@@ -285,19 +285,31 @@ const AttemptForm: React.FC = () => {
       case 'mcq':
       case 'true_false':
         return (
-          <div className="space-y-2">
+          <div className="space-y-3">
             {question.options.map((option, index) => (
-              <label key={index} className="flex items-center space-x-2 p-3 rounded-md hover:bg-gray-50 cursor-pointer border border-gray-200 transition-colors">
+              <label 
+                key={index} 
+                className={`flex items-center space-x-3 p-4 rounded-lg border-2 cursor-pointer transition-all hover:bg-gray-50 ${
+                  value === option 
+                    ? 'border-blue-500 bg-blue-50' 
+                    : 'border-gray-200 hover:border-gray-300'
+                }`}
+              >
                 <input
                   type="radio"
-                  name={question.id}
+                  name={`question-${question.id}`}
                   value={option}
                   checked={value === option}
                   onChange={(e) => updateAnswer(question.id, e.target.value)}
-                  className="rounded-full border-gray-300 text-blue-600 focus:ring-blue-500"
+                  className="w-4 h-4 text-blue-600 focus:ring-blue-500 focus:ring-2"
                   required={question.required}
                 />
-                <span className="text-gray-700 flex-1">{option}</span>
+                <span className={`text-gray-700 flex-1 ${value === option ? 'font-medium text-blue-900' : ''}`}>
+                  {option}
+                </span>
+                {value === option && (
+                  <CheckCircle className="h-5 w-5 text-blue-600" />
+                )}
               </label>
             ))}
           </div>
@@ -308,7 +320,7 @@ const AttemptForm: React.FC = () => {
           <select
             value={value || ''}
             onChange={(e) => updateAnswer(question.id, e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
             required={question.required}
           >
             <option value="">Select an option...</option>
@@ -320,22 +332,22 @@ const AttemptForm: React.FC = () => {
 
       case 'rating':
         return (
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center justify-center space-x-2">
             {[1, 2, 3, 4, 5].map(rating => (
-              <label key={rating} className="flex items-center space-x-1 cursor-pointer">
+              <label key={rating} className="cursor-pointer">
                 <input
                   type="radio"
-                  name={question.id}
+                  name={`question-${question.id}`}
                   value={rating}
                   checked={value === rating}
                   onChange={(e) => updateAnswer(question.id, parseInt(e.target.value))}
                   className="sr-only"
                   required={question.required}
                 />
-                <div className={`w-10 h-10 rounded-full border-2 flex items-center justify-center text-sm font-medium transition-colors ${
+                <div className={`w-12 h-12 rounded-full border-2 flex items-center justify-center text-lg font-medium transition-all ${
                   value === rating
-                    ? 'bg-blue-600 border-blue-600 text-white'
-                    : 'border-gray-300 text-gray-600 hover:border-blue-400'
+                    ? 'bg-blue-600 border-blue-600 text-white shadow-lg transform scale-110'
+                    : 'border-gray-300 text-gray-600 hover:border-blue-400 hover:bg-blue-50'
                 }`}>
                   {rating}
                 </div>
@@ -346,7 +358,7 @@ const AttemptForm: React.FC = () => {
 
       case 'file_upload':
         return (
-          <div className="space-y-2">
+          <div className="space-y-3">
             <input
               type="file"
               accept={question.fileUploadConfig?.allowedFormats?.join(',') || '.pdf,.jpg,.png'}
@@ -367,7 +379,7 @@ const AttemptForm: React.FC = () => {
                 const fileNames = files.map(file => file.name).join(', ');
                 updateAnswer(question.id, fileNames);
               }}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
               required={question.required}
             />
             <div className="text-sm text-gray-500">
@@ -376,7 +388,7 @@ const AttemptForm: React.FC = () => {
               {question.fileUploadConfig?.multiple && ' • Multiple files allowed'}
             </div>
             {value && (
-              <div className="text-sm text-green-600">
+              <div className="text-sm text-green-600 bg-green-50 p-2 rounded">
                 Selected: {value}
               </div>
             )}
@@ -650,9 +662,9 @@ const AttemptForm: React.FC = () => {
           {/* Questions */}
           <div className="p-6 space-y-8">
             {questions.map((question, index) => (
-              <div key={question.id} className="border-b border-gray-100 pb-6 last:border-b-0">
-                <div className="mb-4">
-                  <div className="flex items-center justify-between mb-2">
+              <div key={question.id} className="border-b border-gray-100 pb-8 last:border-b-0">
+                <div className="mb-6">
+                  <div className="flex items-center justify-between mb-3">
                     <h2 className="text-lg font-medium text-gray-900">
                       {index + 1}. {question.text}
                       {question.required && <span className="text-red-500 ml-1">*</span>}
@@ -687,7 +699,7 @@ const AttemptForm: React.FC = () => {
               <button
                 onClick={handleSubmit}
                 disabled={!canSubmit() || isSubmitting}
-                className={`px-6 py-3 text-white rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium ${
+                className={`px-8 py-3 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium text-lg ${
                   form.type === 'quiz' 
                     ? 'bg-blue-600 hover:bg-blue-700' 
                     : 'bg-green-600 hover:bg-green-700'
