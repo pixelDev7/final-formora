@@ -24,12 +24,12 @@ const Landing: React.FC = () => {
               <span className="text-2xl font-bold text-gray-900">Formora</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <Link to="/dashboard" className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+              <Link to="/home" className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                 Get Started
               </Link>
             </div>
             <div className="md:hidden">
-              <Link to="/dashboard" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm">
+              <Link to="/home" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm">
                 Get Started
               </Link>
             </div>
@@ -56,7 +56,7 @@ const Landing: React.FC = () => {
                   <span>Start Creating</span>
                   <ArrowRight className="h-5 w-5" />
                 </Link>
-                <Link to="/dashboard" className="inline-flex items-center justify-center space-x-2 bg-white text-gray-900 px-8 py-4 rounded-lg border-2 border-gray-200 hover:border-gray-300 font-semibold text-lg">
+                <Link to="/home" className="inline-flex items-center justify-center space-x-2 bg-white text-gray-900 px-8 py-4 rounded-lg border-2 border-gray-200 hover:border-gray-300 font-semibold text-lg">
                   <span>View Demo</span>
                 </Link>
               </div>
@@ -153,7 +153,7 @@ const Landing: React.FC = () => {
               <span>Create Your First Form</span>
               <ArrowRight className="h-5 w-5" />
             </Link>
-            <Link to="/dashboard" className="inline-flex items-center justify-center space-x-2 bg-gray-100 text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-200 font-semibold text-lg">
+            <Link to="/home" className="inline-flex items-center justify-center space-x-2 bg-gray-100 text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-200 font-semibold text-lg">
               <span>Explore Dashboard</span>
             </Link>
           </div>

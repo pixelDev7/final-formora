@@ -25,7 +25,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center min-w-0">
-              <Link to="/" className="flex items-center space-x-2">
+              <Link to="/home" className="flex items-center space-x-2">
                 {brandSettings.logoUrl ? (
                   <img src={brandSettings.logoUrl} alt={brandSettings.brandName} className="h-8 w-8" />
                 ) : (
@@ -38,13 +38,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-4">
               <Link
-                to="/"
+                to="/home"
                 className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  isActive('/') && location.pathname === '/'
+                  isActive('/home') || location.pathname === '/home'
                     ? 'text-white'
                     : 'text-gray-500 hover:text-gray-700'
                 }`}
-                style={isActive('/') && location.pathname === '/' ? { backgroundColor: brandSettings.primaryColor } : {}}
+                style={isActive('/home') || location.pathname === '/home' ? { backgroundColor: brandSettings.primaryColor } : {}}
               >
                 <Home className="h-4 w-4" />
                 <span>Home</span>
